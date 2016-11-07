@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Игрулечка</title>
+        <meta charset="utf-8">
+        <script src="mapMethods.js"></script>
+    </head>
+    <body>
+        <script src="test.js"></script>
+        <canvas id="mycanvas" width="800px" height="600px"
+                style="border:1px solid brown;">
+
+        </canvas>
+        <button onclick="loadMap()">MAP</button>
+        <script>
+
+            var canvas = document.getElementById('mycanvas');
+            var ctx = canvas.getContext('2d');
+            var mapManager = {
+                mapData: null,
+                tLayer: null,
+                xCount: 0,
+                yCount: 0,
+                tSize: {x: 40, y: 40},
+                tilesets: new Array(),
+                imgLoadCount: 0,
+                imgLoaded: false,
+                jsonLoaded: false,
+                view: {x: 0, y: 0, w: 800, h: 600}
+            };
+            draw(ctx);
+           
+        
+        </script>
+    </body>
+
+</html>
