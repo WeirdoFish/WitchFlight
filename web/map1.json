@@ -179,27 +179,27 @@
                 },
              "2":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/bad_cloud.png"
+                 "image":"..\/images\/bad_cloud.png"
                 },
              "3":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/bad_star.png"
+                 "image":"..\/images\/bad_star.png"
                 },
              "4":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/bonus_star.png"
+                 "image":"..\/images\/bonus_star.png"
                 },
              "5":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/hp_cloud.png"
+                 "image":"..\/images\/hp_cloud.png"
                 },
              "6":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/witch.png"
+                 "image":"..\/images\/witch.png"
                 },
              "7":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/star.png"
+                 "image":"..\/images\/star.png"
                 }
             },
          "tilewidth":235
@@ -216,23 +216,23 @@
             {
              "0":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/cloud1.png"
+                 "image":"..\/images\/cloud1.png"
                 },
              "1":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/cloud2.png"
+                 "image":"..\/images\/cloud2.png"
                 },
              "2":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/cloud3.png"
+                 "image":"..\/images\/cloud3.png"
                 },
              "3":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/cloud4.png"
+                 "image":"..\/images\/cloud4.png"
                 },
              "4":
                 {
-                 "image":"..\/Code\/Javascript\/images\/bg\/cloud5.png"
+                 "image":"..\/images\/cloud5.png"
                 }
             },
          "tilewidth":388

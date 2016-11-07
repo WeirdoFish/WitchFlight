@@ -1,16 +1,3 @@
- var mapManager = {
-            mapData: null,
-            tLayer: null,
-            xCount: 0,
-            yCount: 0,
-            tSize: {x: 40, y: 40},
-            tilesets: new Array(),
-            imgLoadCount:0,
-            imgLoaded:false,
-            jsonLoaded:false,
-            view:{x:0, y:0, w:800, h:500}
-        };
-
  function loadMap() {
             var path = "serverpage?getjson=true";
             var request = new XMLHttpRequest();
@@ -18,10 +5,12 @@
             request.onreadystatechange = function () {
                 if (request.readyState === 4 && request.status === 200) {
                     //ответ получен
-                    mapManager.parseMap(request.responseText);
 
+                    mapManager.parseMap(request.responseText);
+                    alert(mapManager.mapData.height);
                 }
             };
+
             request.open("GET", path, true);
             request.send();
         };
@@ -36,6 +25,7 @@
      this.mapSize.y=this.yCount*this.tSize.y;
       for(var i=0; i<this.mapData.tilesets.length; i++){
         var img = new Image();
+      
         img.onload = function(){
           mapManager.imgLoadCount++;
           if (mapManager.imgLoadCount===mapManager.mapData.tilesets.length){
@@ -48,7 +38,7 @@
           firstgrid:t.firstgrid,
           image:img,
           name:t.name,
-          xCount:Math.floor(t.imageheight/mapManager.tSize.x),
+          xCount:Math.floor(t.imagewidth/mapManager.tSize.x),
           yCount:Math.floor(t.imageheight/mapManager.tSize.y)
         };
         this.tilesets.push(ts);
