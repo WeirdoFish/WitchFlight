@@ -21,7 +21,7 @@ public class ServerPage extends HttpServlet {
             String json_send;
             if (json_req != null) {
                 try {
-                    String url = "C:\\Users\\pc-home\\Code\\Javascript\\WitchFlight\\web\\map1.json";
+                    String url = "C:\\Users\\pc-home\\Code\\Javascript\\WitchFlight\\web\\newmap1.json";
 
                     //urlConnection = (HttpURLConnection) url.openConnection();
                     //urlConnection.setRequestMethod("GET");

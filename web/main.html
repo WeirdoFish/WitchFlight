@@ -11,7 +11,6 @@
                 style="border:1px solid brown;">
 
         </canvas>
-        <button onclick="loadMap()">MAP</button>
         <script>
 
             var canvas = document.getElementById('mycanvas');
@@ -22,21 +21,22 @@
                 xCount: 0,
                 yCount: 0,
                 tSize: {x: 40, y: 40},
-                mapSize:{x:40, y:40},
+                mapSize: {x: 40, y: 40},
                 tilesets: new Array(),
                 imgLoadCount: 0,
                 imgLoaded: false,
                 jsonLoaded: false,
                 view: {x: 0, y: 0, w: 800, h: 600},
-                parseMap:parseMap,
-                draw:draw,
-                getTile:getTile,
-                isVisible:isVisible
+                parseMap: parseMap,
+                draw: draw,
+                getTile: getTile,
+                isVisible: isVisible,
+                getTileset: getTileset
             };
             loadMap();
-          //  mapManager.draw(ctx);
-           
-        
+          //  moveBackGround();
+            
+            
         </script>
     </body>
 
