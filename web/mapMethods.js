@@ -153,9 +153,13 @@ function  parseEntities() {
     }
 }
 
-function getTilesetIDX(x, y) {
+function getTilesetIDX(x, y, offset) {
     var wX = x;
-    var WY = y;
+    var wY = y;
     var idx = Math.floor(wY / this.tSize.y) * this.xCount + Math.floor(wX / this.tSize.x);
-    return this.tLayer.data[idx];
+    var data = this.tLayer.data[idx]
+//    if (offset===1 && offset===2 && data!==0 ){
+//        return 1;
+//    }
+    return data;
 }

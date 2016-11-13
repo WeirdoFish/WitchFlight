@@ -8,7 +8,7 @@ image.w = 1100;
 image.onload = function () {
     image.xc = image.xc + image.w;
     ctx.drawImage(image, image.xc, image.yc, image.w, image.h);
-    setInterval(move,100);
+    setInterval(move,128);
 };
 
 var image2 = new Image();
@@ -23,7 +23,7 @@ var move = function () {
         ctx.clearRect(0,0,canvas.width, canvas.height);
         ctx.drawImage(image, image.xc, image.yc, image.w, image.h);
         ctx.drawImage(image2, image2.xc, image2.yc, image2.w, image.h);
-
+        
         if (image.xc + image.w < 0) {
             image.xc = image2.xc + image2.w;
         }
@@ -31,7 +31,9 @@ var move = function () {
         if (image2.xc + image2.w < 0) {
             image2.xc = image.xc + image.w;
         }
-
+offset =0;
         mapManager.draw(ctx);
         gameManager.drawAll();
+        physManager.update();
+        physManager.onTouch(gameManager.player);
 };

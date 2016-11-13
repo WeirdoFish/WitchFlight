@@ -7,10 +7,13 @@ var Entity = {
     createPlayer: function () {
         var Player = Object.create(Entity);
         Player.move_y = 0;
+        Player.score=0;
         Player.draw = function draw(ctx,scalex,scaley) {
             spriteManager.drawSprite(ctx, "witch", this.pos_x, this.pos_y,scalex,scaley)
         };
-        Player.update = function update() {};
+        Player.update = function update() {
+            this.pos_x+=5;
+        };
         Player.onTouchEntity = function onTouchEntity(obj) {};
         Player.onTouchMap = function onTouchMap(obj) {};
         return Player;
@@ -20,6 +23,9 @@ var Entity = {
         Star.draw = function draw(ctx,scalex,scaley) {
             spriteManager.drawSprite(ctx, "star", this.pos_x, this.pos_y,scalex,scaley)
         };
+        Star.update = function update (){
+           //this.pos_x-=2; 
+        }
         Star.kill = function kill() {};
         return Star;
     }
@@ -56,7 +62,8 @@ function parseAtlas() {
         img: new Image(),
         counts: witch.tilecount,
         frames: new Array(),
-        h: witch.tileheight, w: witch.tilewidth
+        h: witch.tileheight, w: witch.tilewidth,
+        curFrame:0
     };
 
     var img = new Image();
@@ -68,9 +75,7 @@ function parseAtlas() {
             sx: 0, sy: 0
         };
         sprite.sx = i * witch.tilewidth;
-        if (sprite.sx !== 0)
-            sprite.sx += 1; //смещение от предыдущего кадра
-      //  sprite.sy = witch.tileheight;
+         
 
         witchSprite.frames.push(sprite);
     }
@@ -94,9 +99,6 @@ function parseAtlas() {
             sx: 0, sy: 0
         };
         sprite.sx = i * star.tilewidth;
-        if (sprite.sx !== 0)
-            sprite.sx += 1; //смещение от предыдущего кадра
-      // sprite.sy = star.tileheight;
 
        starSprite.frames.push(sprite);
     }
@@ -108,7 +110,15 @@ function drawSprite(ctx, name, x, y,scalex,scaley) {
     if (mapManager.isVisible(x, y, sprite.w, sprite.h)) {
         x -= mapManager.view.x;
         y -= mapManager.view.y;
-      ctx.drawImage(sprite.img, sprite.frames[0].sx, sprite.frames[0].sy, sprite.w, sprite.h, x, y, scalex, scaley);
+        //setInterval(animate(ctx,sprite,x, y,scalex,scaley),50);
+     
+      if (name==="witch"){
+         ctx.drawImage(sprite.img, sprite.frames[sprite.curFrame].sx, sprite.frames[sprite.curFrame].sy, sprite.w, sprite.h, x, y, scalex, scaley);
+        sprite.curFrame++;
+        if (sprite.curFrame===sprite.frames.length)
+            sprite.curFrame=0;
+      } else
+           ctx.drawImage(sprite.img, sprite.frames[0].sx, sprite.frames[0].sy, sprite.w, sprite.h, x, y, scalex, scaley);
       //  ctx.drawImage(sprite.img, x, y, sprite.w, sprite.h);
     } else
         return;
@@ -121,3 +131,10 @@ function getSprite(name) {
     }
     return null;
 } 
+
+
+function animate(ctx,t,scalex,x, y,scaley){
+     for (var i = 0; i<t.frames.length; i++){
+         ctx.drawImage(t.img, t.frames[i].sx, t.frames[i].sy, t.w, t.h, x, y, scalex, scaley);
+     }
+}
