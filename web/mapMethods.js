@@ -13,28 +13,7 @@ function loadMap() {
     request.send();
 }
 ;
-mapManager = {
-                mapData: null,
-                nextRow: 0,
-                tLayer: null,
-                xCount: 0,
-                yCount: 0,
-                tSize: {x: 40, y: 40},
-                mapSize: {x: 40, y: 40},
-                tilesets: new Array(),
-                imgLoadCount: 0,
-                imgLoaded: false,
-                jsonLoaded: false,
-                view: {x: 0, y: 0, w: 800, h: 600},
-                parseMap: parseMap,
-                draw: draw,
-                getTile: getTile,
-                isVisible: isVisible,
-                getTileset: getTileset,
-                parseEntities: parseEntities,
-                getTilesetIDX: getTilesetIDX,
-                getPosIDX: getPosIDX
-            };
+
             
 function parseMap(tilesJSON) {
     this.mapData = JSON.parse(tilesJSON);

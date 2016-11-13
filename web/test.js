@@ -17,13 +17,10 @@ image2.yc = 0;
 image2.src = "images/bg0.png";
 image2.w = 1100;
 
-var ic_on = new Image();
-ic_on.src="images/soundon.png";
-ic_on.onclick=function(){soundManager.stop();};
+var ic_snd = new Image();
+ic_snd.src="images/soundon.png";
+ic_snd.onclick=function(){soundManager.stop();};
 
-var ic_off = new Image();
-ic_off.src="images/soundoff.png";
-ic_off.onclick=function(){soundManager.initSound();};
 
 var move = function () {
     image.xc -= 1;
@@ -56,7 +53,7 @@ function drawText(ctx, text) {
     ic_star.src = "images/star.png";
    // ic_star.onload = function () {
         ctx.drawImage(ic_star, 10, canvas.height - 35, 30, 30);
-        ctx.drawImage(ic_on, canvas.width-50, 20, 30, 30);
+        ctx.drawImage(ic_snd, canvas.width-50, 20, 30, 30);
    // }
     ctx.fillText(text, 50, canvas.height - 8);
 }

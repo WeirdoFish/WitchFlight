@@ -1,0 +1,39 @@
+.menubox{
+    display:block;
+    position:relative;
+    border-radius: 15px;
+    width:800px;
+    height:600px;
+}
+.menuitem{
+    display:block;
+    background-color: #1C3973;
+    position:relative;
+    border-radius: 15px;
+    width:350px;
+    height:60px;
+    font-family: 'Myriad Pro';
+    font-size: 40px; 
+    color:#FFFFFF;
+    font-weight: 800;
+    margin-top:100px;
+}
+.menuitem:hover {
+    background-color: #F48A4E;
+    cursor:pointer;
+}
+
+.score{
+    display:block;
+    position:relative;
+    border-radius: 15px;
+    width:350px;
+    height:60px;
+    font-family: 'Myriad Pro';
+    font-size: 40px; 
+    color:#1C3973;
+    font-weight: 800;
+    margin-top:100px;
+}
+
+

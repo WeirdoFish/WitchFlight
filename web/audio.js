@@ -1,15 +1,3 @@
-var soundManager = {
-    clips: {},
-    context: null,
-    gainNode: null,
-    loaded: false,
-    initSound: initSound,
-    loadSound: loadSound,
-    loadArray: loadArray,
-    play: play,
-    stop:stop
-};
-
 function initSound() {
     this.context = new AudioContext();
     this.gainNode = this.context.createGain ? this.context.createGain() : this.context.createGainNode();

@@ -8,29 +8,60 @@
         <script src="objects.js"></script>
         <script src="audio.js"></script>
         <script src="initAll.js"></script>
+
+        <link rel='stylesheet' href='menu.css'> 
+
+
     </head>
     <body>
         <script src="test.js"></script>
-        <canvas id="mycanvas" width="800px" height="600px">
+        <div id="game" style="display:none;">
+            <canvas id="mycanvas" width="800px" height="600px">
+            </canvas>
 
-        </canvas>
+        </div>
+        <div id="menu" class="menubox" align="center"  >
+            <div class="menuitem" onclick="initAll();">
+                Начать игру
+            </div>
+        </div>
+        <div id="fail" class="menubox" style="display:none;" align="center">
+            <div class="score" id="result_div" align="center">
+           
+            </div>
+            <div class="menuitem" onclick="initAll();" align="center">
+                Начать заново
+            </div>
+        </div>
         <script>
             document.body.addEventListener("keydown", this.initMove);
             var canvas = document.getElementById('mycanvas');
             var ctx = canvas.getContext('2d');
-            var gameManager = {
-                entities: [],
-                player: null,
-                init: init,
-                initPlayer: initPlayer,
-                drawAll: drawAll
+
+            function initAll() {
+                var screen = document.getElementById("menu");
+                var game = document.getElementById("game");
+                document.getElementById("fail").style.display = "none";
+                screen.style.display = "none";
+                game.style.display = "block";
+                initManagers();
+                loadMap();
+                gameManager.drawAll();
             }
+            function failed() {
+                setTimeout(function () {
+                    var screen = document.getElementById("fail");
+                    var game = document.getElementById("game");
+                    document.getElementById("result_div").innerHTML = "Звёзд собрано:  " + gameManager.player.score;
+                    screen.style.display = "block";
+                    game.style.display = "none";
 
+                }, 1000);
 
-
-            loadMap();
-
-            gameManager.drawAll();
+            }
+            // initManagers();
+            // loadMap();
+            // gameManager.drawAll();
         </script>
     </body>
 

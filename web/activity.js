@@ -1,4 +1,3 @@
-
 function initMove(event) {
     if (event.keyCode === 38 || event.keyCode === 87) {
         if (gameManager.player.pos_y > 0)
@@ -13,6 +12,7 @@ function initMove(event) {
 
 
 
+//init obj
 function init(type) {
     if (type === "player") {
         var player = Entity.createPlayer();
@@ -67,7 +67,8 @@ var physManager = {
             touch = mapManager.getTilesetIDX(coords[i].x, coords[i].y);
             if (touch !== 0) {
                 soundManager.play("sounds/fail.wav");
-                console.log("AAAAAA!" + i);
+                failed( gameManager.player.score);
+                clearInterval(processGame);
                 touch = 0;
                 return;
             }
@@ -87,7 +88,7 @@ var physManager = {
                         get = 0;
                         player.score += 1;
                         gameManager.entities.splice(j, 1);
-                         soundManager.play("sounds/coin.wav");
+                        soundManager.play("sounds/coin.wav");
                     }
                 }
             }
