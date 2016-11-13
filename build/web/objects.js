@@ -14,8 +14,6 @@ var Entity = {
         Player.update = function update() {
             this.pos_x+=5;
         };
-        Player.onTouchEntity = function onTouchEntity(obj) {};
-        Player.onTouchMap = function onTouchMap(obj) {};
         return Player;
     },
     createStar: function () {
@@ -36,10 +34,6 @@ spriteManager = {
     drawSprite: drawSprite,
     parseAtlas: parseAtlas,
     getSprite: getSprite
-};
-
-var SpriteInfo = {
-    sx: 0, sy: 0
 };
 
 function parseAtlas() {
@@ -132,9 +126,3 @@ function getSprite(name) {
     return null;
 } 
 
-
-function animate(ctx,t,scalex,x, y,scaley){
-     for (var i = 0; i<t.frames.length; i++){
-         ctx.drawImage(t.img, t.frames[i].sx, t.frames[i].sy, t.w, t.h, x, y, scalex, scaley);
-     }
-}

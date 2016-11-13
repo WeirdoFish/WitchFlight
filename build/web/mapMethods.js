@@ -1,14 +1,11 @@
 function loadMap() {
-    var path = "serverpage?getjson=true";
+    var path = "newmap11.json";//"serverpage?getjson=true";
     var request = new XMLHttpRequest();
 
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
             //ответ получен
-
-            mapManager.parseMap(request.responseText);
-            mapManager.parseEntities();
-            spriteManager.parseAtlas();
+           loadAll(request.responseText);
         }
     };
 
@@ -16,7 +13,29 @@ function loadMap() {
     request.send();
 }
 ;
-
+mapManager = {
+                mapData: null,
+                nextRow: 0,
+                tLayer: null,
+                xCount: 0,
+                yCount: 0,
+                tSize: {x: 40, y: 40},
+                mapSize: {x: 40, y: 40},
+                tilesets: new Array(),
+                imgLoadCount: 0,
+                imgLoaded: false,
+                jsonLoaded: false,
+                view: {x: 0, y: 0, w: 800, h: 600},
+                parseMap: parseMap,
+                draw: draw,
+                getTile: getTile,
+                isVisible: isVisible,
+                getTileset: getTileset,
+                parseEntities: parseEntities,
+                getTilesetIDX: getTilesetIDX,
+                getPosIDX: getPosIDX
+            };
+            
 function parseMap(tilesJSON) {
     this.mapData = JSON.parse(tilesJSON);
     this.xCount = this.mapData.width;
@@ -153,7 +172,7 @@ function  parseEntities() {
     }
 }
 
-function getTilesetIDX(x, y, offset) {
+function getTilesetIDX(x, y) {
     var wX = x;
     var wY = y;
     var idx = Math.floor(wY / this.tSize.y) * this.xCount + Math.floor(wX / this.tSize.x);
@@ -162,4 +181,10 @@ function getTilesetIDX(x, y, offset) {
 //        return 1;
 //    }
     return data;
+}
+function getPosIDX(x, y) {
+    var wX = x;
+    var wY = y;
+    var idx = Math.floor(wY / this.tSize.y) * this.xCount + Math.floor(wX / this.tSize.x);
+   return idx;
 }

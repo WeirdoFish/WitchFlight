@@ -6,6 +6,8 @@
         <script src="mapMethods.js"></script>
         <script src="activity.js"></script>
         <script src="objects.js"></script>
+        <script src="audio.js"></script>
+        <script src="initAll.js"></script>
     </head>
     <body>
         <script src="test.js"></script>
@@ -13,31 +15,9 @@
 
         </canvas>
         <script>
-document.body.addEventListener("keydown", this.initMove);
+            document.body.addEventListener("keydown", this.initMove);
             var canvas = document.getElementById('mycanvas');
             var ctx = canvas.getContext('2d');
-            var mapManager = {
-                mapData: null,
-                nextRow:0,
-                tLayer: null,
-                xCount: 0,
-                yCount: 0,
-                tSize: {x: 40, y: 40},
-                mapSize: {x: 40, y: 40},
-                tilesets: new Array(),
-                imgLoadCount: 0,
-                imgLoaded: false,
-                jsonLoaded: false,
-                view: {x: 0, y: 0, w: 800, h: 600},
-                parseMap: parseMap,
-                draw: draw,
-                getTile: getTile,
-                isVisible: isVisible,
-                getTileset: getTileset,
-                parseEntities: parseEntities,
-                getTilesetIDX:getTilesetIDX
-            };
-
             var gameManager = {
                 entities: [],
                 player: null,
@@ -45,9 +25,11 @@ document.body.addEventListener("keydown", this.initMove);
                 initPlayer: initPlayer,
                 drawAll: drawAll
             }
-            
+
+
+
             loadMap();
-            
+
             gameManager.drawAll();
         </script>
     </body>

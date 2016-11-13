@@ -12,6 +12,7 @@ function initMove(event) {
 }
 
 
+
 function init(type) {
     if (type === "player") {
         var player = Entity.createPlayer();
@@ -52,29 +53,43 @@ var physManager = {
         coords.push({x: player.pos_x + 2 * tx, y: player.pos_y + tx});
         coords.push({x: player.pos_x + 3 * tx, y: player.pos_y + tx});
         //метла
-        coords.push({x: player.pos_x, y: player.pos_y - 2 * tx});
+        coords.push({x: player.pos_x, y: player.pos_y + 2 * tx});
         coords.push({x: player.pos_x + tx, y: player.pos_y + 2 * tx});
         coords.push({x: player.pos_x + 2 * tx, y: player.pos_y + 2 * tx});
         coords.push({x: player.pos_x + 3 * tx, y: player.pos_y + 2 * tx});
         //ноги
-        coords.push({x: player.pos_x + 3 * tx, y: player.pos_y + 3 * tx});
+        coords.push({x: player.pos_x + 2 * tx, y: player.pos_y + 3 * tx});
 
         var touch = 0;
         for (var i = 0; i < coords.length; i++) {
             coords.x += 10;
             coords.y += 10;
-            touch = mapManager.getTilesetIDX(coords[i].x, coords[i].y, 1);
-            touch = mapManager.getTilesetIDX(coords[i].x, coords[i].y, 2);
+            touch = mapManager.getTilesetIDX(coords[i].x, coords[i].y);
             if (touch !== 0) {
+                soundManager.play("sounds/fail.wav");
                 console.log("AAAAAA!" + i);
                 touch = 0;
                 return;
             }
         }
 
-        for (var i = 0; i < gameManager.entities.length; i++) {
-            if (gameManager.entities[i].name !== "witch") {
-                var star = gameManager.entities[i];
+        for (var j = 0; j < gameManager.entities.length; j++) {
+            if (gameManager.entities[j].name !== "witch") {
+
+                var star = gameManager.entities[j];
+                var tile_star = mapManager.getPosIDX(star.pos_x + 5, star.pos_y + 5);
+                var get = 0;
+                for (var i = 0; i < coords.length; i++) {
+                    get = mapManager.getPosIDX(coords[i].x, coords[i].y);
+                    if (get === tile_star) {
+                        //console.log("GOTCHA");
+                        
+                        get = 0;
+                        player.score += 1;
+                        gameManager.entities.splice(j, 1);
+                         soundManager.play("sounds/coin.wav");
+                    }
+                }
             }
         }
 
