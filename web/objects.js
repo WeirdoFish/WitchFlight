@@ -3,11 +3,12 @@ var Entity = {
     pos_y: 0,
     size_x: 0,
     size_y: 0,
+    name: null,
     createPlayer: function () {
         var Player = Object.create(Entity);
         Player.move_y = 0;
-        Player.draw = function draw(ctx) {
-            drawSprite(ctx,"witch_S",this.pos_x,this.pos_y)
+        Player.draw = function draw(ctx,scalex,scaley) {
+            spriteManager.drawSprite(ctx, "witch", this.pos_x, this.pos_y,scalex,scaley)
         };
         Player.update = function update() {};
         Player.onTouchEntity = function onTouchEntity(obj) {};
@@ -16,38 +17,31 @@ var Entity = {
     },
     createStar: function () {
         var Star = Object.create(Entity);
-        Star.draw = function draw(ctx) {
-            drawSprite(ctx,"star_S",this.pos_x,this.pos_y)
+        Star.draw = function draw(ctx,scalex,scaley) {
+            spriteManager.drawSprite(ctx, "star", this.pos_x, this.pos_y,scalex,scaley)
         };
         Star.kill = function kill() {};
         return Star;
     }
 }
 
-var SpriteManager = {
+spriteManager = {
     sprites: new Array(),
     drawSprite: drawSprite,
     parseAtlas: parseAtlas,
     getSprite: getSprite
 };
-var Sprite = {
-    name: null,
-    img: new Image(),
-    counts: 0,
-    frames: new Array(),
-    h: 0, w: 0
-}
+
 var SpriteInfo = {
     sx: 0, sy: 0
-}
+};
 
-var parseAtlas = function () {
+function parseAtlas() {
     var star;
     var witch;
-    var manager = new SpriteManager();
 
     for (var i = 0; i < mapManager.mapData.tilesets.length; i++) {
-        var t = mapManager.mapData.tilesets;
+        var t = mapManager.mapData.tilesets[i];
         if (t.name === "witch_S") {
             witch = t;
         }
@@ -57,57 +51,70 @@ var parseAtlas = function () {
     }
 
 
-    var witchSprite = new Sprite();
+    var witchSprite = {
+        name: 'witch',
+        img: new Image(),
+        counts: witch.tilecount,
+        frames: new Array(),
+        h: witch.tileheight, w: witch.tilewidth
+    };
+
     var img = new Image();
     img.src = witch.image;
     witchSprite.img = img;
-    witchSprite.counts = witch.tilecount;
 
-    witchSprite.w = witch.tilewidth;
-    witchSprite.h = witch.tileheight;
     for (var i = 0; i < witch.tilecount; i++) {
-        var sprite = new SpriteInfo();
+        var sprite = {
+            sx: 0, sy: 0
+        };
         sprite.sx = i * witch.tilewidth;
         if (sprite.sx !== 0)
             sprite.sx += 1; //смещение от предыдущего кадра
-        sprite.sy = witch.tileheight;
+      //  sprite.sy = witch.tileheight;
 
         witchSprite.frames.push(sprite);
     }
-    manager.sprites.push(witchSprite);
+    spriteManager.sprites.push(witchSprite);
 
-    var starSprite = new Sprite();
-    var img2 = new Image();
-    img2.src = star.image;
+    var starSprite = {
+        name: 'star',
+        img: new Image(),
+        counts: star.tilecount,
+        frames: new Array(),
+        h: star.tileheight, w: star.tilewidth
+    };
+
+    var img = new Image();
+    img.src = star.image;
     starSprite.img = img;
-    starSprite.counts = star.tilecount;
-
-    starSprite.w = star.tilewidth;
-    starSprite.h = star.tileheight;
+    spriteManager.sprites.push(starSprite);
+    
     for (var i = 0; i < star.tilecount; i++) {
-        var sprite = new SpriteInfo();
+        var sprite = {
+            sx: 0, sy: 0
+        };
         sprite.sx = i * star.tilewidth;
         if (sprite.sx !== 0)
             sprite.sx += 1; //смещение от предыдущего кадра
-        sprite.sy = star.tileheight;
+      // sprite.sy = star.tileheight;
 
-        manager.spritesS.push(sprite);
+       starSprite.frames.push(sprite);
     }
 
-    return manager;
 }
 
-drawSprite = function (ctx, name, x, y) {
+function drawSprite(ctx, name, x, y,scalex,scaley) {
     var sprite = this.getSprite(name);
-    if (!mapManager.isVisible(x, y, sprite.w, sprite.h)) {
-        x-=mapManager.view.x;
-        y-=mapManager.view.y;
-        ctx.drawImage(sprite.image,sprite.frames[0].x,sprite.frames[0].y,sprite.w, sprite.h, x,y,sprite.w, sprite.h)
+    if (mapManager.isVisible(x, y, sprite.w, sprite.h)) {
+        x -= mapManager.view.x;
+        y -= mapManager.view.y;
+      ctx.drawImage(sprite.img, sprite.frames[0].sx, sprite.frames[0].sy, sprite.w, sprite.h, x, y, scalex, scaley);
+      //  ctx.drawImage(sprite.img, x, y, sprite.w, sprite.h);
     } else
         return;
 }
 
-getSprite = function (name) {
+function getSprite(name) {
     for (var i = 0; i < this.sprites.length; i++) {
         if (this.sprites[i].name === name)
             return this.sprites[i];

@@ -4,6 +4,8 @@
         <title>Игрулечка</title>
         <meta charset="utf-8">
         <script src="mapMethods.js"></script>
+        <script src="activity.js"></script>
+        <script src="objects.js"></script>
     </head>
     <body>
         <script src="test.js"></script>
@@ -11,7 +13,7 @@
 
         </canvas>
         <script>
-
+document.body.addEventListener("keydown", this.initMove);
             var canvas = document.getElementById('mycanvas');
             var ctx = canvas.getContext('2d');
             var mapManager = {
@@ -30,10 +32,20 @@
                 draw: draw,
                 getTile: getTile,
                 isVisible: isVisible,
-                getTileset: getTileset
+                getTileset: getTileset,
+                parseEntities: parseEntities
             };
-            loadMap();            
+
+            var gameManager = {
+                entities: [],
+                init: init,
+                initPlayer: initPlayer,
+                drawAll: drawAll
+            }
             
+            loadMap();
+            
+            gameManager.drawAll();
         </script>
     </body>
 

@@ -33,5 +33,5 @@ var move = function () {
         }
 
         mapManager.draw(ctx);
-   
+        gameManager.drawAll();
 };

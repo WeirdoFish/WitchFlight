@@ -7,6 +7,8 @@ function loadMap() {
             //ответ получен
 
             mapManager.parseMap(request.responseText);
+            mapManager.parseEntities();
+            spriteManager.parseAtlas();
         }
     };
 
@@ -118,4 +120,42 @@ function getTileset(tileIndex) {
         }
         return null;
     }
+}
+
+function  parseEntities() {
+    if (!mapManager.imgLoaded || !mapManager.jsonLoaded) {
+        setTimeout(function () {
+            mapManager.parseEntities();
+        }, 100);
+    } else {
+        for (var j = 0; j < this.mapData.layers.length; j++) {
+            var layer = this.mapData.layers[j];
+            if (layer.type === "objectgroup") {
+                var entities = layer;
+                for (var i = 0; i < entities.objects.length; i++) {
+                    var e = entities.objects[i];
+                    try {
+                        var obj = gameManager.init(e.type);
+                        obj.name = e.name;
+                        obj.pos_x = e.x;
+                        obj.pos_y = e.y;
+                        obj.size_x = e.width;
+                        obj.size_y = e.height;
+                        gameManager.entities.push(obj);
+                        if (obj.name === "player")
+                            gameManager.initPlayer(obj);
+                    } catch (ex) {
+                        console.log("err" + e.gid + " " + e.type + " " + ex);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function getTilesetIDX(x, y) {
+    var wX = x;
+    var WY = y;
+    var idx = Math.floor(wY / this.tSize.y) * this.xCount + Math.floor(wX / this.tSize.x);
+    return this.tLayer.data[idx];
 }
