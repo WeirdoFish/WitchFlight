@@ -62,6 +62,8 @@ function initManagers() {
 
     spriteManager = {
         sprites: new Array(),
+        loaded: false,
+        imgLoadCount: 0,
         drawSprite: drawSprite,
         parseAtlas: parseAtlas,
         getSprite: getSprite
@@ -92,6 +94,13 @@ function loadAll(responseText) {
     soundManager.initSound();
     soundManager.loadArray(urls);
     soundManager.play(urls[0], {looping: true, volume: 0.4});
-    processGame = setInterval(move, 128);
+    startGame();
+}
+
+function startGame() {
+    if (mapManager.imgLoaded && mapManager.imgLoaded && soundManager.loaded && spriteManager.loaded) {
+        processGame = setInterval(move, 100);
+    } else
+        setTimeout(startGame, 100);
 }
 

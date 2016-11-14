@@ -55,7 +55,7 @@
                     document.getElementById("result_div").innerHTML = "Звёзд собрано:  " + gameManager.player.score;
                     screen.style.display = "block";
                     game.style.display = "none";
-
+                    clearInterval(processGame);
                 }, 1000);
 
             }

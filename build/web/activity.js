@@ -35,7 +35,17 @@ function drawAll() {
 
 var physManager = {
     update: function () {
-        mapManager.view.x += 5;
+       
+        if (mapManager.view.x > mapManager.xCount * mapManager.tSize.x) {
+//            var temp_y = mapManager.player.pos_y;
+//            mapManager.view.x = 0;
+//            mapManager.parseEntities();
+//            mapManager.player.pos_y = temp_y;
+            mapManager.view.x = 0
+            failed();
+        } else {
+         mapManager.view.x += 5;
+        }
         for (var i = 0; i < gameManager.entities.length; i++) {
             // if (gameManager.entities[i].name !== "witch")
             gameManager.entities[i].update();
@@ -66,9 +76,9 @@ var physManager = {
             coords.y += 10;
             touch = mapManager.getTilesetIDX(coords[i].x, coords[i].y);
             if (touch !== 0) {
-                soundManager.play("sounds/fail.wav");
-                failed( gameManager.player.score);
-                clearInterval(processGame);
+                // soundManager.play("sounds/fail.wav");
+                //failed( gameManager.player.score);
+                //clearInterval(processGame);
                 touch = 0;
                 return;
             }
@@ -84,7 +94,7 @@ var physManager = {
                     get = mapManager.getPosIDX(coords[i].x, coords[i].y);
                     if (get === tile_star) {
                         //console.log("GOTCHA");
-                        
+
                         get = 0;
                         player.score += 1;
                         gameManager.entities.splice(j, 1);
