@@ -19,7 +19,6 @@ image2.w = 1100;
 
 var ic_snd = new Image();
 ic_snd.src="images/soundon.png";
-ic_snd.onclick=function(){soundManager.stop();};
 
 
 var move = function () {
@@ -52,8 +51,8 @@ function drawText(ctx, text) {
     var ic_star = new Image();
     ic_star.src = "images/star.png";
    // ic_star.onload = function () {
-        ctx.drawImage(ic_star, 10, canvas.height - 35, 30, 30);
-        ctx.drawImage(ic_snd, canvas.width-50, 20, 30, 30);
+        ctx.drawImage(ic_star, 10,10, 30, 30);
+        ctx.drawImage(ic_snd, canvas.width-50, 10, 30, 22);
    // }
-    ctx.fillText(text, 50, canvas.height - 8);
+    ctx.fillText(text, 50, 37);
 }

@@ -16,7 +16,7 @@
     <body>
         <script src="test.js"></script>
         <div id="game" style="display:none;">
-            <canvas id="mycanvas" width="800px" height="600px">
+            <canvas id="mycanvas" width="800px" height="600px" >
             </canvas>
 
         </div>
@@ -27,41 +27,66 @@
         </div>
         <div id="fail" class="menubox" style="display:none;" align="center">
             <div class="score" id="result_div" align="center">
-           
+
             </div>
             <div class="menuitem" onclick="initAll();" align="center">
                 Начать заново
             </div>
         </div>
+        <div class="score" id="wait" align="center" style="display:none;">
+            Загрузка...
+        </div>
+
+
         <script>
             document.body.addEventListener("keydown", this.initMove);
             var canvas = document.getElementById('mycanvas');
             var ctx = canvas.getContext('2d');
 
             function initAll() {
-                var screen = document.getElementById("menu");
-                var game = document.getElementById("game");
+                document.getElementById("menu").style.display = "none";
                 document.getElementById("fail").style.display = "none";
-                screen.style.display = "none";
-                game.style.display = "block";
+                document.getElementById("wait").style.display = "block";
+                //document.getElementById("game").style.display = "block";
                 initManagers();
                 loadMap();
                 gameManager.drawAll();
             }
             function failed() {
                 setTimeout(function () {
-                    var screen = document.getElementById("fail");
-                    var game = document.getElementById("game");
+                    soundManager.stop();
+                    document.getElementById("fail").style.display = "block";
+                    document.getElementById("game").style.display = "none";
                     document.getElementById("result_div").innerHTML = "Звёзд собрано:  " + gameManager.player.score;
-                    screen.style.display = "block";
-                    game.style.display = "none";
                     clearInterval(processGame);
                 }, 1000);
-
             }
-            // initManagers();
-            // loadMap();
-            // gameManager.drawAll();
+
+            canvas.addEventListener('click', function (event) {
+                //function click(event){
+                var x = event.pageX,
+                        y = event.pageY;
+                // ctx.drawImage(ic_snd, canvas.width-50, 10, 30, 22);
+                if ((x > canvas.width - 50 || x < canvas.width - 20)
+                        && (y > 10 || y < 32)) {
+                    //  alert(x+" "+y);
+                    //console.log(x+" "+y);
+                    if (!soundManager.isMuted) {
+                        soundManager.stop();
+                        ic_snd.src = "images/soundoff.png";
+                        soundManager.isMuted = true;
+                    } else {
+                        soundManager.initSound();
+                        ic_snd.src = "images/soundon.png";
+                        soundManager.isMuted = false;
+                        soundManager.play("sounds/sound.mp3", {looping: true, volume: 0.4});
+
+                    }
+                }
+
+
+            }, false);
+            // }
         </script>
     </body>
 

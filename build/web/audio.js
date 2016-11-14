@@ -74,6 +74,7 @@ function play(url, settings) {
 
 function stop(){
     this.gainNode.disconnect();
-    this.gainNode = this.context.createGainNode(0);
+    //this.gainNode = this.context.createGainNode(0);
+    this.gainNode = this.context.createGain ? this.context.createGain() : this.context.createGainNode();
     this.gainNode.connect(this.context.destination);
 }

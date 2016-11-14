@@ -35,7 +35,7 @@ function drawAll() {
 
 var physManager = {
     update: function () {
-       
+
         if (mapManager.view.x > mapManager.xCount * mapManager.tSize.x) {
 //            var temp_y = mapManager.player.pos_y;
 //            mapManager.view.x = 0;
@@ -44,7 +44,7 @@ var physManager = {
             mapManager.view.x = 0
             failed();
         } else {
-         mapManager.view.x += 5;
+            mapManager.view.x += 5;
         }
         for (var i = 0; i < gameManager.entities.length; i++) {
             // if (gameManager.entities[i].name !== "witch")
@@ -76,9 +76,10 @@ var physManager = {
             coords.y += 10;
             touch = mapManager.getTilesetIDX(coords[i].x, coords[i].y);
             if (touch !== 0) {
-                // soundManager.play("sounds/fail.wav");
-                //failed( gameManager.player.score);
-                //clearInterval(processGame);
+                if (!soundManager.isMuted)
+                    soundManager.play("sounds/fail.wav");
+                failed(gameManager.player.score);
+                clearInterval(processGame);
                 touch = 0;
                 return;
             }
@@ -98,7 +99,8 @@ var physManager = {
                         get = 0;
                         player.score += 1;
                         gameManager.entities.splice(j, 1);
-                        soundManager.play("sounds/coin.wav");
+                        if (!soundManager.isMuted)
+                            soundManager.play("sounds/coin.wav");
                     }
                 }
             }

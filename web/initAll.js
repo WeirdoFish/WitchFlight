@@ -71,6 +71,7 @@ function initManagers() {
 
     soundManager = {
         clips: {},
+        isMuted:false,
         context: null,
         gainNode: null,
         loaded: false,
@@ -89,8 +90,8 @@ function loadAll(responseText) {
     spriteManager.parseAtlas();
     var urls = new Array();
     urls.push("sounds/sound.mp3");
-    urls.push("sounds/coin.wav")
-    urls.push("sounds/fail.wav")
+    urls.push("sounds/coin.wav");
+    urls.push("sounds/fail.wav");
     soundManager.initSound();
     soundManager.loadArray(urls);
     soundManager.play(urls[0], {looping: true, volume: 0.4});
@@ -100,6 +101,8 @@ function loadAll(responseText) {
 function startGame() {
     if (mapManager.imgLoaded && mapManager.imgLoaded && soundManager.loaded && spriteManager.loaded) {
         processGame = setInterval(move, 100);
+        document.getElementById("game").style.display = "block";
+        document.getElementById("wait").style.display = "none";
     } else
         setTimeout(startGame, 100);
 }
