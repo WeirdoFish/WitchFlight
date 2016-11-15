@@ -1,12 +1,12 @@
 function initMove(event) {
     if (event.keyCode === 38 || event.keyCode === 87) {
         if (gameManager.player.pos_y > 0)
-            gameManager.player.pos_y -= 5;
+            gameManager.player.pos_y -= 3;
     }
 
     if (event.keyCode === 40 || event.keyCode === 83) {
         if (gameManager.player.pos_y < 445)
-            gameManager.player.pos_y += 5;
+            gameManager.player.pos_y += 3;
     }
 }
 
@@ -44,7 +44,7 @@ var physManager = {
             mapManager.view.x = 0
             failed();
         } else {
-            mapManager.view.x += 5;
+            mapManager.view.x += 1;
         }
         for (var i = 0; i < gameManager.entities.length; i++) {
             // if (gameManager.entities[i].name !== "witch")
@@ -63,8 +63,9 @@ var physManager = {
         coords.push({x: player.pos_x + 2 * tx, y: player.pos_y + tx});
         coords.push({x: player.pos_x + 3 * tx, y: player.pos_y + tx});
         //метла
-        coords.push({x: player.pos_x, y: player.pos_y + 2 * tx});
-        coords.push({x: player.pos_x + tx, y: player.pos_y + 2 * tx});
+        //
+        //coords.push({x: player.pos_x, y: player.pos_y + 2 * tx});
+        //  coords.push({x: player.pos_x + tx, y: player.pos_y + 2 * tx});
         coords.push({x: player.pos_x + 2 * tx, y: player.pos_y + 2 * tx});
         coords.push({x: player.pos_x + 3 * tx, y: player.pos_y + 2 * tx});
         //ноги
@@ -75,11 +76,13 @@ var physManager = {
             coords.x += 10;
             coords.y += 10;
             touch = mapManager.getTilesetIDX(coords[i].x, coords[i].y);
-            if (touch !== 0) {
+            if (touch) {
                 if (!soundManager.isMuted)
                     soundManager.play("sounds/fail.wav");
+                //console.log(touch);
                 failed(gameManager.player.score);
                 clearInterval(processGame);
+                ic_snd.src = "images/soundon.png";
                 touch = 0;
                 return;
             }
@@ -108,11 +111,4 @@ var physManager = {
 
     }
 
-//        var X=player.pos_x;
-//         var Y=player.pos_y;
-//         var cloud=mapManager.getTilesetIDX(X,Y);
-//         if (cloud!==0){
-//             alert ("AAAA!");
-//         }
-//    }
 };

@@ -1,4 +1,6 @@
 function initManagers() {
+   
+
     gameManager = {
         entities: [],
         player: null,
@@ -18,7 +20,7 @@ function initManagers() {
         imgLoadCount: 0,
         imgLoaded: false,
         jsonLoaded: false,
-        view: {x: 0, y: 0, w: 800, h: 600},
+        view: {x: 0, y: 0, w: 1000, h: 600},
         parseMap: parseMap,
         draw: draw,
         getTile: getTile,
@@ -43,7 +45,7 @@ function initManagers() {
                 spriteManager.drawSprite(ctx, "witch", this.pos_x, this.pos_y, scalex, scaley)
             };
             Player.update = function update() {
-                this.pos_x += 5;
+                this.pos_x += 1;
             };
             return Player;
         },
@@ -71,7 +73,7 @@ function initManagers() {
 
     soundManager = {
         clips: {},
-        isMuted:false,
+        isMuted: false,
         context: null,
         gainNode: null,
         loaded: false,
@@ -100,7 +102,7 @@ function loadAll(responseText) {
 
 function startGame() {
     if (mapManager.imgLoaded && mapManager.imgLoaded && soundManager.loaded && spriteManager.loaded) {
-        processGame = setInterval(move, 100);
+        processGame = setInterval(move, 25);
         document.getElementById("game").style.display = "block";
         document.getElementById("wait").style.display = "none";
     } else

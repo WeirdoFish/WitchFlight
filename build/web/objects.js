@@ -80,9 +80,11 @@ function drawSprite(ctx, name, x, y, scalex, scaley) {
         //setInterval(animate(ctx,sprite,x, y,scalex,scaley),50);
 
         if (name === "witch") {
-            ctx.drawImage(sprite.img, sprite.frames[sprite.curFrame].sx, sprite.frames[sprite.curFrame].sy, sprite.w, sprite.h, x, y, scalex, scaley);
-            sprite.curFrame++;
-            if (sprite.curFrame === sprite.frames.length)
+            ctx.drawImage(sprite.img, sprite.frames[Math.floor(sprite.curFrame)].sx, sprite.frames[Math.floor(sprite.curFrame)].sy, sprite.w, sprite.h, x, y, scalex, scaley);
+          //  sprite.curFrame++;
+          sprite.curFrame+=0.2;
+         // sprite.curFrame=Math.floor(sprite.curFrame);
+            if (Math.floor(sprite.curFrame) === sprite.frames.length)
                 sprite.curFrame = 0;
         } else
             ctx.drawImage(sprite.img, sprite.frames[0].sx, sprite.frames[0].sy, sprite.w, sprite.h, x, y, scalex, scaley);

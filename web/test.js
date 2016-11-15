@@ -1,24 +1,24 @@
-var image = new Image();
-image.src = "images/bg0.png";
-image.xc = 0;
-image.yc = 0;
-image.h = 600;
-image.w = 1100;
+ var image = new Image();
+    image.src = "images/bg0.png";
+    image.xc = 0;
+    image.yc = 0;
+    image.h = 600;
+    image.w = 1100;
 
-image.onload = function () {
-    image.xc = image.xc + image.w;
-    ctx.drawImage(image, image.xc, image.yc, image.w, image.h);
-    // setInterval(move, 128);
-};
+    image.onload = function () {
+        image.xc = image.xc + image.w;
+        ctx.drawImage(image, image.xc, image.yc, image.w, image.h);
+        // setInterval(move, 128);
+    };
 
-var image2 = new Image();
-image2.xc = 0;
-image2.yc = 0;
-image2.src = "images/bg0.png";
-image2.w = 1100;
+    var image2 = new Image();
+    image2.xc = 0;
+    image2.yc = 0;
+    image2.src = "images/bg0.png";
+    image2.w = 1100;
 
-var ic_snd = new Image();
-ic_snd.src="images/soundon.png";
+    var ic_snd = new Image();
+    ic_snd.src = "images/soundon.png";
 
 
 var move = function () {
