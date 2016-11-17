@@ -22,8 +22,8 @@
 
 
 var move = function () {
-    image.xc -= 1;
-    image2.xc -= 1;
+    image.xc -= 0.2;
+    image2.xc -= 0.2;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(image, image.xc, image.yc, image.w, image.h);
     ctx.drawImage(image2, image2.xc, image2.yc, image2.w, image.h);

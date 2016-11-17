@@ -82,7 +82,7 @@ function drawSprite(ctx, name, x, y, scalex, scaley) {
         if (name === "witch") {
             ctx.drawImage(sprite.img, sprite.frames[Math.floor(sprite.curFrame)].sx, sprite.frames[Math.floor(sprite.curFrame)].sy, sprite.w, sprite.h, x, y, scalex, scaley);
           //  sprite.curFrame++;
-          sprite.curFrame+=0.2;
+          sprite.curFrame+=0.1;
          // sprite.curFrame=Math.floor(sprite.curFrame);
             if (Math.floor(sprite.curFrame) === sprite.frames.length)
                 sprite.curFrame = 0;

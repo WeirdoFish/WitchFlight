@@ -101,8 +101,8 @@ function loadAll(responseText) {
 }
 
 function startGame() {
-    if (mapManager.imgLoaded && mapManager.imgLoaded && soundManager.loaded && spriteManager.loaded) {
-        processGame = setInterval(move, 25);
+    if (mapManager.imgLoaded && mapManager.jsonLoaded && soundManager.loaded && spriteManager.loaded) {
+        processGame = setInterval(move, 10);
         document.getElementById("game").style.display = "block";
         document.getElementById("wait").style.display = "none";
     } else

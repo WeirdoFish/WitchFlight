@@ -1,12 +1,12 @@
 function initMove(event) {
     if (event.keyCode === 38 || event.keyCode === 87) {
         if (gameManager.player.pos_y > 0)
-            gameManager.player.pos_y -= 3;
+            gameManager.player.pos_y -= 4;
     }
 
     if (event.keyCode === 40 || event.keyCode === 83) {
         if (gameManager.player.pos_y < 445)
-            gameManager.player.pos_y += 3;
+            gameManager.player.pos_y += 4;
     }
 }
 
